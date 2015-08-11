@@ -13,7 +13,22 @@
   </head>
 
   <body>
-
+    <div class="top-row">
+      <div class="small-6 large-2 columns logo">The Trouble Center logo will go here.</div>
+      <div class="small-6 large-8 columns navbar">
+        <ul>
+          <% unless current_user %>
+            <li><%= link_to "Login with Twitter", login_path %></li>
+          <% end %>
+          <% if current_user %>
+            <li><%= link_to "Logout", logout_path %></li>
+            <li>Your listed location is <%= "#{session[:location]}" %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="small-12 large-2 columns new-trouble"><a href="" class="create button text-center">I Have a Trouble</a></div>
+    </div>
+    <div class="divider small-12 large-12 columns"></div>
     <%= yield %>
 
   </body>

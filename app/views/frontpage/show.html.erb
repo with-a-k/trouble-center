@@ -1,15 +1,3 @@
-<div class="top-row">
-	<div class="small-6 large-2 columns logo">The Trouble Center logo will go here.</div>
-	<div class="small-6 large-8 columns navbar">
-		<ul>
-		  <li>Welcome, <%= current_user.screenname %></li>
-		  <li>Open Troubles</li>
-		  <li><%= link_to "Logout", logout_path %></li>
-		</ul>
-	</div>
-	<div class="small-12 large-2 columns new-trouble"><a href="" class="create button text-center">I Have a Trouble</a></div>
-</div>
-<div class="divider small-12 large-12 columns"></div>
 <div class="main-section">
 	<div class="recently-solved small-4 large-4 columns">
 		<h3>Recently Solved Troubles</h3>
@@ -31,7 +19,7 @@
 		<div class="accepted-trouble">
 			<h5 class="trouble-title">LFR</h5>
 			<p class="trouble-description">Just for a couple nights while...</p>
-			<a href="" class="solve success button text-center">Solved!</a>
+			<%= link_to "Solved!", trouble_solve_path(trouble.id, 'Solve'), method: :PATCH, remote: true, class: 'solve success button text-center' %>
 		</div>
 	</div>
 	<div class="recently-posted small-12 large-4 columns"><h3>Recently Posted Troubles</h3>

@@ -1,4 +1,6 @@
 class Trouble < ActiveRecord::Base
-  # need to distinguish a trouble's creator from the user that accepts it
-  belongs_to :user
+  scope :solved, -> { where(status: "solved") }
+
+  belongs_to :trouble_creator, class_name: "User"
+  belongs_to :trouble_solver, class_name: "User"
 end

@@ -1,0 +1,17 @@
+<div class="new-post">
+	<%= form_for @trouble do |f| %>
+		<%= f.label(:title, "The title of your trouble.") %>
+		<%= f.text_field(:title) %>
+		<%= f.label(:description, "A more detailed description of your trouble.") %>
+		<%= f.text_field(:body) %>
+		<%= f.label(:skill, "What skill someone will need to effectively solve your trouble.") %>
+		<%= f.select(:skill) options_for_select(["None", "Legal", "First Aid", "Mathematics", "Computers"]) %>
+		<%= radio_button_tag(:timeliness, "urgent") %>
+		<%= label_tag(:timeliness_urgent, "Urgent Trouble (right now)") %>
+		<%= radio_button_tag(:timeliness, "timely") %>
+		<%= label_tag(:timeliness_timely, "Timely Trouble (hours or a day or so)") %>
+		<%= radio_button_tag(:timeliness, "relaxed") %>
+		<%= label_tag(:timeliness_relaxed, "Relaxed Trouble (no rush)") %>
+		<%= submit_tag("Get Help!", class: "button success round") %>
+	<% end %>
+</div>

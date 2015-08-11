@@ -1,0 +1,8 @@
+<div class="divider small-12 large-12 columns"></div>
+<div class="finalize-form">
+	<%= form_tag '/sessions/finalize' do %>
+		<%= label_tag(:location, "Where are you now?") %>
+		<%= text_field_tag(:location) %>
+		<%= submit_tag("Finish Login", class: "button success round") %>
+	<% end %>
+</div>

@@ -1,34 +1,56 @@
-<div class="top-row">
-	<div class="small-6 large-2 columns logo">The Trouble Center logo will go here.</div>
-	<div class="small-6 large-8 columns navbar">
-		<ul>
-		  <li><%= link_to "Login with Twitter", login_path %></li>
-		</ul>
-	</div>
-	<div class="small-12 large-2 columns new-trouble"><a href="" class="create button text-center">I Have a Trouble</a></div>
-</div>
-<div class="divider small-12 large-12 columns"></div>
 <div class="main-section">
 	<div class="recently-solved small-6 large-4 columns">
+		<% cache("troubles-solved-#{Trouble.solved.count}-#{Trouble.solved.maximum(:updated_at)}") do %>
 		<h3>Recently Solved Troubles</h3>
-		<div class="solved-trouble">
-			<h5 class="trouble-title">I Don't Understand Statistics</h5>
-			<p class="trouble-description">No, seriously! I need a mathematician...</p>
-		</div>
-		<div class="solved-trouble">
-			<h5 class="trouble-title">Someone's Hurt!</h5>
-			<p class="trouble-description">They fell down the stairs near this...</p>
-		</div>
+			<% Trouble.solved.first(5).each do |trouble| %>
+				<div class="solved-trouble">
+					<h5 class="trouble-title"><%= trouble.name %></h5>
+					<p class="trouble-description"><%= trouble.description %></p>
+				</div>
+			<% end %>
+		<% end %>
 	</div>
-	<div class="recently-posted small-6 large-8 columns">
-		<h3>Recently Posted Troubles</h3>
-		<div class="trouble">
-			<h5 class="trouble-title">Cheated!</h5>
-			<p class="trouble-description">I'm sure he's cheating, but...</p>
+	<% if current_user %>
+		<% cache("troubles-owned-#{Trouble.count}-#{Trouble.maximum(:updated_at)}") do %>
+		<div class="accepted-troubles small-8 large-4 columns"><h3>Troubles You've Taken On</h3>
+			<div class="accepted-trouble">
+				<h5 class="trouble-title">My Neighbor...</h5>
+				<p class="trouble-description">Won't stop complaining about my...</p>
+				<a href="" class="solve success button text-center">Solved!</a>
+			</div>
+			<div class="accepted-trouble">
+				<h5 class="trouble-title">LFR</h5>
+				<p class="trouble-description">Just for a couple nights while...</p>
+			</div>
 		</div>
-		<div class="trouble">
-			<h5 class="trouble-title">Quick, I need this!</h5>
-			<p class="trouble-description">I'm short on cake ingredients!</p>
+		<% end %>
+		<% cache("troubles-recent-#{Trouble.count}-#{Trouble.maximum(:updated_at)}") do %>
+		<div class="recently-posted small-12 large-4 columns"><h3>Recently Posted Troubles</h3>
+			<div class="trouble">
+				<h5 class="trouble-title">Cheated!</h5>
+				<p class="trouble-description">I'm sure he's cheating, but...</p>
+				<a href="" class="accept button text-center">Accept?</a>
+			</div>
+			<div class="trouble">
+				<h5 class="trouble-title">Quick, I need this!</h5>
+				<p class="trouble-description">I'm short on cake ingredients!</p>
+				<a href="" class="accept button text-center">Accept?</a>
+			</div>
 		</div>
-	</div>
+		<% end %>
+	<% else %>
+		<% cache("troubles-recent-#{Trouble.count}-#{Trouble.maximum(:updated_at)}") do %>
+		<div class="recently-posted small-6 large-8 columns">
+			<h3>Recently Posted Troubles</h3>
+			<div class="trouble">
+				<h5 class="trouble-title">Cheated!</h5>
+				<p class="trouble-description">I'm sure he's cheating, but...</p>
+			</div>
+			<div class="trouble">
+				<h5 class="trouble-title">Quick, I need this!</h5>
+				<p class="trouble-description">I'm short on cake ingredients!</p>
+			</div>
+		</div>
+		<% end %>
+	<% end %>
 </div>
