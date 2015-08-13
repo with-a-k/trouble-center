@@ -26,4 +26,11 @@ module ApplicationHelper
   def solve_button(trouble)
     link_to "Solved!", trouble_solve_path(trouble.id), method: :PATCH, remote: true, class: 'solve success button text-center'
   end
+
+  def cache_key_for(model_class, label="")
+    class_name = model_class.name
+    count = model_class.count
+    max_timestamp = model_class.maximum(:updated_at)
+    [label, class_name, count, max_timestamp].join("-")
+  end
 end

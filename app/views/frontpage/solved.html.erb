@@ -1,8 +1,8 @@
 <div class="main-section">
 	<div class="recently-solved small-12 columns">
-		<% cache("troubles-recently-solved-#{Trouble.solved.count}-#{Trouble.solved.maximum(:updated_at)}") do %>
-		<h3>Recently Posted Troubles</h3>
-			<% Trouble.solved.first(15).each do |trouble| %>
+		<h3>Recently Solved Troubles</h3>
+		<% cache(cache_key_for(Trouble, "solved")) do %>
+			<% @troubles.each do |trouble| %>
 				<div class="recent-trouble">
 					<h5 class="trouble-title"><%= trouble.name %></h5>
 					<p class="trouble-description"><%= trouble.description %></p>

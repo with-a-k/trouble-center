@@ -1,5 +1,5 @@
 class Trouble < ActiveRecord::Base
-  default_scope { order('created_at DESC') }
+  default_scope { order('updated_at DESC') }
   scope :solved,          -> { where(status: "solved") }
   scope :open,            -> { where(status: "open") }
   scope :owned_by,        ->(user) { where(trouble_creator: user) }
