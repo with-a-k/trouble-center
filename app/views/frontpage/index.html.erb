@@ -1,3 +1,14 @@
+<div>
+	<div class="small-3 small-offset-3 columns">
+		<p class="main-text">Filter by timeliness:</p>
+	</div>
+	<select class="small-3 columns end" id="timeliness-filter">
+		<option value="all">All</option>
+		<option value="urgent">Urgent</option>
+		<option value="timely">Timely</option>
+		<option value="relaxed">Relaxed</option>
+	</select>
+</div>
 <div class="main-section">
 	<div class="recently-posted small-12 columns">
 		<% cache("troubles-recently-posted-#{Trouble.count}-#{Trouble.maximum(:updated_at)}") do %>

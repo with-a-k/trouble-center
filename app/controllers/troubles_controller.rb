@@ -33,6 +33,7 @@ class TroublesController < ApplicationController
   def assign
     trouble = Trouble.find(params[:id])
     trouble.trouble_solver_id = current_user.id
+    trouble.status = "accepted"
     redirect_to :back 
   end
 
@@ -42,7 +43,9 @@ class TroublesController < ApplicationController
     if current_user
       return current_user
     else
-      return User.create(name: "Anonymous", screenname: "Anonymous")
+      @current_user = User.create(name: "Anonymous", screenname: "Anonymous")
+      session[:user_id] = @current_user.id
+      return @current_user
     end
   end
 end

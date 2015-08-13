@@ -9,4 +9,6 @@ class Trouble < ActiveRecord::Base
   belongs_to :trouble_solver, class_name: "User"
 
   validates :name, presence: true
+  validates :timeliness, presence: true
+  validates :status, presence: true
 end
