@@ -26,14 +26,14 @@ class TroublesController < ApplicationController
 
   def solve
     trouble = Trouble.find(params[:id])
-    trouble.status = "solved"
+    trouble.update(status: "solved")
     redirect_to :back
   end
 
   def assign
     trouble = Trouble.find(params[:id])
-    trouble.trouble_solver_id = current_user.id
-    trouble.status = "accepted"
+    trouble.update(trouble_solver_id: current_user.id, status: "accepted")
+    byebug
     redirect_to :back 
   end
 
