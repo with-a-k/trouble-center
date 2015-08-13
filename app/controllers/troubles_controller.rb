@@ -1,14 +1,15 @@
 class TroublesController < ApplicationController
   def create
     Trouble.create(
-      trouble_creator: check_user
-      name: params[:name]
-      description: params[:description]
-      skill: params[:skill]
-      timeliness: params[:timeliness]
-      location: session[:location]
+      trouble_creator: check_user,
+      name: params[:trouble][:title],
+      description: params[:trouble][:description],
+      skill: params[:trouble][:skill],
+      timeliness: params[:trouble][:timeliness],
+      location: session[:location],
       status: "open"
     )
+    redirect_to root_path
   end
 
   def new
@@ -19,9 +20,29 @@ class TroublesController < ApplicationController
 
   end
 
+  def show
+
+  end
+
   def solve
     trouble = Trouble.find(params[:id])
     trouble.status = "solved"
     redirect_to :back
+  end
+
+  def assign
+    trouble = Trouble.find(params[:id])
+    trouble.trouble_solver_id = current_user.id
+    redirect_to :back 
+  end
+
+  helper_method :check_user
+
+  def check_user
+    if current_user
+      return current_user
+    else
+      return User.create(name: "Anonymous", screenname: "Anonymous")
+    end
   end
 end

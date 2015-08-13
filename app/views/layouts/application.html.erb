@@ -16,17 +16,21 @@
     <div class="top-row">
       <div class="small-6 large-2 columns logo">The Trouble Center logo will go here.</div>
       <div class="small-6 large-8 columns navbar">
-        <ul>
+        <ul class="left">
           <% unless current_user %>
-            <li><%= link_to "Login with Twitter", login_path %></li>
+            <li class="toggle-topbar menu-icon"><%= link_to "Login with Twitter", login_path %></li>
           <% end %>
           <% if current_user %>
-            <li><%= link_to "Logout", logout_path %></li>
-            <li>Your listed location is <%= "#{session[:location]}" %></li>
+            <li class="toggle-topbar menu-icon"><%= link_to "Logout", logout_path %></li>
+            <li class="toggle-topbar menu-icon">Your listed location is <%= "#{session[:location]}" %></li>
           <% end %>
+          <li class="toggle-topbar menu-icon"><%= link_to "Recently Posted", root_path %></li>
+          <li class="toggle-topbar menu-icon"><%= link_to "Troubles You Posted", user_owned_troubles_path %></li>
+          <li class="toggle-topbar menu-icon"><%= link_to "Troubles You Accepted", user_accepted_troubles_path %></li>
+          <li class="toggle-topbar menu-icon"><%= link_to "Recently Solved", solved_troubles_path %></li>
         </ul>
       </div>
-      <div class="small-12 large-2 columns new-trouble"><a href="" class="create button text-center">I Have a Trouble</a></div>
+      <div class="small-12 large-2 columns new-trouble"><a href="/troubles/new" class="create button text-center">I Have a Trouble</a></div>
     </div>
     <div class="divider small-12 large-12 columns"></div>
     <%= yield %>
